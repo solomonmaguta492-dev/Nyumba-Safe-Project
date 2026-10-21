@@ -26,11 +26,11 @@
         <label>Search by Name
           <input type="search" id="search" aria-placeholder="e.g. Sunrise" />
         </label>
-        <labeel>Area
+        <label>Area
           <select id="area">
             <option value="all">All Areas</option>
           </select>
-        </labeel>
+        </label>
         <label>Maximum Rent (KES)
           <input
             type="number"
@@ -52,6 +52,21 @@
         <button type="button" id="clear" class="text-btn">Clear Filters</button>
         <button type="button" id="add-listing" class="btn btn-primary">Add Listing</button>
       </form>
+
+      <p id="count" class="count" role="status" aria-live="polite"></p>
+
+      <div class="layout">
+        <section class="listing-section" aria-labeledby="result-heading">
+            <h2 id="results-heading" class="sr-only">Available houses</h2>
+            <div id="results" class="results"></div>
+
+        </section>  
+        <aside class="map-col" aria-label="Map of houses">
+            <div id="map"></div>
+            <p class="map-note">Map data by OpenStreetMap. Pins show the approximate location.</p>
+        </aside>
+    </div>
     </main>
+    
   </body>
 </html>
