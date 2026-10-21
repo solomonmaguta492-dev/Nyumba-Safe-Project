@@ -77,6 +77,74 @@
     <dialog id="listing-dialog">
         <form id="listing-form" class="dialog-form" novalidate>
         <h2 id="listing-title">Add a Listing</h2> 
+
+        <label>Apartment Name
+          <input type="name" type="text" maxlength="60">
+          <span class="field-error" data-error-for="name"></span>
+        </label>
+
+        <div class="two-col">
+            <label>Area
+                <input name="area" type="text" placeholder="e.g. Juja">
+                <span class="field-error" data-error-for="area"></span>
+            </label>
+
+            <label>Landmark (optional)
+                <input name="location" type="text" placeholder="e.g. Near Gate C">
+                
+            </label>
+
+        </div>
+        <div class="two-col">
+            <label>Bedrooms
+               <select name="bedrooms">
+                    <option value="">Choose</option>
+                    <option value="0">Bedsitter</option>
+                    <option value="1">1 bedroom</option>
+                    <option value="2">2 bedrooms</option>
+                    <option value="3">3 bedrooms</option>
+                     <option value="4">4 bedrooms</option>
+                </select>
+                <span class="field-error" data-error-for="bedrooms"></span>
+            </label>
+
+            <label>Monthly rent (KES)
+                <input name="rent" type="number" min="0"  placeholder="e.g. 8500">
+                <span class="field-error" data-error-for="rent"></span>
+            </label>
+
+        </div>
+        <div class="two-col">
+        <label>Manager's name
+          <input name="manager" type="text">
+          <span class="field-error" data-error-for="manager"></span>
+        </label>
+        <label>Manager's phone
+          <input name="phone" type="tel" placeholder="e.g. 0712345678">
+          <span class="field-error" data-error-for="phone"></span>
+        </label>
+      </div>
+      <label>Facebook page (optional)
+        <input name="facebook" type="url" placeholder="https://facebook.com/...">
+        <span class="field-error" data-error-for="facebook"></span>
+      </label>
+      <div class="two-col">
+        <label>Latitude (optional)
+          <input name="lat" type="text" placeholder="-1.1018">
+          <span class="field-error" data-error-for="lat"></span>
+        </label>
+        <label>Longitude (optional)
+          <input name="lng" type="text" placeholder="37.0144">
+          <span class="field-error" data-error-for="lng"></span>
+        </label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="listing-cancel" class="btn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save listing</button>
+      </div>
+    </form>
+  </dialog>
+
     </form>
 
     </dialog>
