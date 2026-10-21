@@ -20,5 +20,38 @@
         </p>
       </div>
     </header>
+
+    <main id="main" class="wrap">
+      <form id="filters" class="filters" aria-label="filter houses">
+        <label>Search by Name
+          <input type="search" id="search" aria-placeholder="e.g. Sunrise" />
+        </label>
+        <labeel>Area
+          <select id="area">
+            <option value="all">All Areas</option>
+          </select>
+        </labeel>
+        <label>Maximum Rent (KES)
+          <input
+            type="number"
+            id="max-rent"
+            min="0"
+            step="500"
+            aria-placeholder="e.g. 15000"
+          />
+        </label>
+        <label>Bedrooms
+          <select id="bedrooms">
+            <option value="any">Any</option>
+            <option value="0">Bedsitter</option>
+            <option value="1">1 bedroom</option>
+            <option value="2">2 bedrooms</option>
+            <option value="3">3 or more</option>
+          </select>
+        </label>
+        <button type="button" id="clear" class="text-btn">Clear Filters</button>
+        <button type="button" id="add-listing" class="btn btn-primary">Add Listing</button>
+      </form>
+    </main>
   </body>
 </html>
