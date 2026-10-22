@@ -57,7 +57,9 @@ h1, h2, h3, .brand, .rent {font-family: "Outfit", system ui, sans-serif;}
 
 /* auto-fit grid: as many 170px-or-wider columns as fit, so the filters wrap on small screens */
 .filter {
-  
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px; align-items: end; margin: 22px 0 8px; padding: 16px;
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
 }
 
 /* Each label sits above its input*/
@@ -70,3 +72,16 @@ input, select, textarea {
 
 .count {margin: 10px 0 14px; color: var(--text-light); font-weight: 600; }
 
+
+/* Page layout: listing and map */
+
+
+/*mobile first = one column with the map shown above the listing.*/
+.layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 40px; }
+ /*move the map above the listing on small screens*/
+.map-col { order: -1; }
+
+/*the map needsa height or it stays invisible*/
+.map-note { margin: 6px 0 0; font-size: 13px; color: var(--text-light); }
+ 
+.results { display: grid; gap: 16px; align-content: start; }
