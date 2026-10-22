@@ -116,4 +116,36 @@ input, select, textarea {
  
 .manager { margin: 10px 0 0; font-size: 15px; }
 .confirmed { margin: 2px 0 0; font-size: 14px; color: var(--text-light); }
+
+
+/*BUTTONS*/
+/* Row of contact buttons, then a second row of text actions under a divider */
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.actions.manage { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); gap: 4px 14px; }
+
+/*Base Button; the variants below only change colors*/
+
+.btn {
+  font: inherit; font-weight: 600; font-size: 15px; padding: 8px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: #fff; color: var(--text); cursor: pointer; text-decoration: none;
+}
+.btn:hover { border-color: var(--green); }
+.btn:disabled { opacity: 0.6; cursor: wait; }   /* while a request is being sent */
+.btn-primary { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.btn-primary:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); }
+.btn-wa { background: var(--green); border-color: var(--green); color: #fff; }
+.btn-wa:hover { background: var(--green-dark); border-color: var(--green-dark); }
+.btn-warn { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.btn-warn:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); }
  
+/*Link-style buttons: confirms, edit, delete, report, clear filters*/ 
+.text-btn { font: inherit; font-weight: 600; font-size: 15px; background: none; border: none; color: var(--green); cursor: pointer; padding: 6px 0; }
+.text-btn:hover { text-decoration: underline; }
+.text-btn.danger { color: var(--terracotta); }
+.text-btn.warn { color: var(--terracotta); }
+
+/* Message shown when there are no results, while loading, or when the API fails */
+
+.empty { padding: 24px; background: var(--white); border: 1px dashed var(--border); border-radius: 12px; color: var(--text-light); }
+
+
