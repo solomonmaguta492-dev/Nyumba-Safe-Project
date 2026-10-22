@@ -1,0 +1,207 @@
+/* NyumbaSafe styles
+   Colours: deep green (main), terracotta (bold accent) and gold (small highlights),
+   plus warm neutrals: cream, beige and charcoal. */
+
+/* Colour variables: change a value here and the whole site updates. */
+:root {
+  /* Main colours */
+  --green: #1f5c43;           /* header, links, verified badge, WhatsApp button */
+  --green-dark: #174532;      /* green when you hover a button */
+  --green-light: #dcebe2;     /* soft green behind the Verified badge */
+  --terracotta: #c4553a;      /* bold accent: main buttons, warnings, errors, delete */
+  --terracotta-dark: #a4432b; /* terracotta when you hover a button */
+  --gold: #e3a82b;            /* small highlights, such as the brand name */
+
+  /* Warm neutrals */
+  --bg: #fbf6ec;              /* cream page background */
+  --white: #ffffff;           /* cards and forms */
+  --text: #2b2b2b;            /* charcoal text */
+  --text-light: #6a635a;      /* smaller, lighter text */
+  --border: #e6dcc8;          /* beige lines around boxes */
+  --sand: #cbbfa6;            /* darker beige for card tops and badges */
+}
+
+/* ---------- 1. Base styles ---------- */
+
+/* border-box makes padding count inside an element's width, which keeps layouts from overflowing */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito Sans", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+/* Headings, the brand name and the rent use the second font */
+h1, h2, h3, .brand, .rent { font-family: "Outfit", system-ui, sans-serif; }
+
+/* .wrap centres content and stops it getting too wide on big screens */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- 2. Header ---------- */
+.site-header {
+  /* A green layer sits on top of the picture so the white text stays easy to read.
+     It is solid on the left (where the text is) and lighter on the right (where the picture shows). */
+  background:
+    linear-gradient(90deg, rgba(23, 69, 50, 0.96) 0%, rgba(23, 69, 50, 0.78) 50%, rgba(23, 69, 50, 0.2) 100%),
+    url("images/header-bg.svg") center bottom / cover no-repeat;
+  background-color: var(--green);   /* shown if the picture does not load */
+  color: #fff;
+  padding: 34px 0 30px;
+}
+.brand { margin: 0 0 4px; font-weight: 700; font-size: 18px; color: var(--gold); }
+/* clamp(min, preferred, max) makes the heading shrink on phones and grow on desktops */
+.site-header h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
+.tagline { margin: 8px 0 14px; max-width: 60ch; color: var(--bg); }
+.safety { display: inline-block; margin: 0; padding: 7px 12px; border-radius: 8px; background: #f8e1d8; color: #8a3320; font-weight: 600; font-size: 15px; }
+
+/* ---------- 3. Filter bar and form fields ---------- */
+
+/* auto-fit grid: as many 170px-or-wider columns as fit, so the filters wrap on small screens */
+.filters {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px; align-items: end; margin: 22px 0 8px; padding: 16px;
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+}
+/* Each label sits above its input */
+label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--text-light); font-weight: 600; }
+
+/* One shared look for every input in the project */
+input, select, textarea {
+  font: inherit; color: var(--text); padding: 9px 10px; width: 100%;
+  border: 1px solid var(--border); border-radius: 8px; background: #fff;
+}
+
+.count { margin: 10px 0 14px; color: var(--text-light); font-weight: 600; }
+
+/* ---------- 4. Page layout: listings and map ----------
+   Mobile first: one column, with the map shown above the listings. */
+.layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 40px; }
+.map-col { order: -1; }   /* order: -1 moves the map above the listings on small screens */
+#map { height: 280px; border-radius: 12px; border: 1px solid var(--border); }   /* the map needs a height or it stays invisible */
+.map-note { margin: 6px 0 0; font-size: 13px; color: var(--text-light); }
+
+.results { display: grid; gap: 16px; align-content: start; }
+
+/* ---------- 5. Listing cards ---------- */
+
+/* The coloured top border shows status: grey for unverified, green for verified */
+.card {
+  background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--sand);
+  border-radius: 12px; padding: 16px;
+}
+.card.is-verified { border-top-color: var(--green); }
+/* Added by JavaScript when you click a pin on the map */
+.card.is-active { outline: 3px solid var(--green); outline-offset: 2px; }
+
+.card-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.card h3 { margin: 0; font-size: 20px; line-height: 1.2; }
+.place { margin: 2px 0 0; color: var(--text-light); font-size: 15px; }
+.rent { margin: 0; font-size: 22px; font-weight: 700; white-space: nowrap; }   /* nowrap keeps "KES 8,500" on one line */
+.rent small { font-size: 14px; font-weight: 500; color: var(--text-light); }
+
+/* Small pill-shaped labels: bedrooms and verified status */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.badge { padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #f1e8d6; }
+.badge.ok { background: var(--green-light); color: var(--green); }   /* Verified */
+.badge.no { background: #ece6d9; color: var(--text-light); }          /* Not verified yet */
+
+.manager { margin: 10px 0 0; font-size: 15px; }
+.confirmed { margin: 2px 0 0; font-size: 14px; color: var(--text-light); }
+
+/* ---------- 6. Buttons ---------- */
+
+/* Row of contact buttons, then a second row of text actions under a divider */
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.actions.manage { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); gap: 4px 14px; }
+
+/* Base button; the variants below only change colours */
+.btn {
+  font: inherit; font-weight: 600; font-size: 15px; padding: 8px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: #fff; color: var(--text); cursor: pointer; text-decoration: none;
+}
+.btn:hover { border-color: var(--green); }
+.btn:disabled { opacity: 0.6; cursor: wait; }   /* while a request is being sent */
+.btn-primary { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.btn-primary:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); }
+.btn-wa { background: var(--green); border-color: var(--green); color: #fff; }
+.btn-wa:hover { background: var(--green-dark); border-color: var(--green-dark); }
+.btn-warn { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.btn-warn:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); }
+
+/* Link-style buttons: Confirm, Edit, Delete, Report, Clear filters */
+.text-btn { font: inherit; font-weight: 600; font-size: 15px; background: none; border: none; color: var(--green); cursor: pointer; padding: 6px 0; }
+.text-btn:hover { text-decoration: underline; }
+.text-btn.danger { color: var(--terracotta); }
+.text-btn.warn { color: var(--terracotta); }
+
+/* Message shown when there are no results, while loading, or when the API fails */
+.empty { padding: 24px; background: var(--white); border: 1px dashed var(--border); border-radius: 12px; color: var(--text-light); }
+
+/* ---------- 7. Pop-up forms (the <dialog> elements) ---------- */
+/* min(520px, 94vw) keeps the dialog within the screen on phones */
+dialog { border: none; border-radius: 14px; padding: 0; width: min(520px, 94vw); max-height: 92vh; }
+dialog::backdrop { background: rgba(43, 43, 43, 0.5); }   /* dark layer behind the pop-up */
+.dialog-form { display: grid; gap: 12px; padding: 20px; }
+.dialog-form h2 { margin: 0; font-size: 22px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }   /* two fields side by side */
+.report-target { margin: 0; color: var(--text-light); }
+/* min-height reserves space so the form does not jump when an error message appears */
+.field-error { min-height: 1.1em; color: var(--terracotta); font-size: 13px; font-weight: 600; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+/* ---------- 8. Toast notification (success and error messages) ---------- */
+/* Hidden by default (opacity 0). JavaScript adds .show to display it. */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+  background: var(--text); color: #fff; padding: 10px 18px; border-radius: 8px;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s; max-width: 90vw; z-index: 2000;
+}
+.toast.show { opacity: 1; }
+.toast.error { background: var(--terracotta); }
+
+/* ---------- 9. Accessibility ---------- */
+
+/* Visible outline when someone navigates with the keyboard */
+:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+
+/* Hides text visually but keeps it for screen readers (used for the results heading) */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* "Skip to listings" link: off-screen until a keyboard user tabs to it */
+.skip-link { position: absolute; left: 12px; top: -60px; z-index: 3000; padding: 8px 14px; background: #fff; color: var(--green); border-radius: 8px; font-weight: 600; }
+.skip-link:focus { top: 12px; }
+
+/* ---------- 10. Footer ---------- */
+.site-footer { padding: 20px 0 32px; color: var(--text-light); font-size: 14px; border-top: 1px solid var(--border); }
+
+/* ==========================================================================
+   Responsive design
+   Mobile (up to 519px): one column, form fields stacked
+   Tablet (520px to 959px): one column, taller map
+   Desktop (960px and up): listings on the left, sticky map on the right
+   ========================================================================== */
+
+/* Mobile: stack the paired form fields */
+@media (max-width: 520px) {
+  .two-col { grid-template-columns: 1fr; }
+  .rent { font-size: 20px; }
+}
+
+/* Tablet: more room, so make the map taller */
+@media (min-width: 521px) and (max-width: 959px) {
+  #map { height: 360px; }
+}
+
+/* Desktop: two columns. The map stays in view while you scroll the listings. */
+@media (min-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .map-col { order: 0; position: sticky; top: 16px; align-self: start; }
+  #map { height: calc(100vh - 60px); min-height: 420px; }
+}
+
+/* Respect people who turn off animations in their system settings */
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
