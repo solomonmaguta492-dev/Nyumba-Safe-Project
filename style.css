@@ -85,3 +85,35 @@ input, select, textarea {
 .map-note { margin: 6px 0 0; font-size: 13px; color: var(--text-light); }
  
 .results { display: grid; gap: 16px; align-content: start; }
+
+/*Listing Cards*/
+
+/*The coloured top border shows status: grey for unverified, green for verified */
+.card {
+  background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--sand);
+  border-radius: 12px; padding: 16px;
+}
+.card.is-verified { border-top-color: var(--green); }
+/* Added by JavaScript when you click a pin on the map */
+
+.card.is-active { outline: 3px solid var(--green); outline-offset: 2px; }
+ 
+.card-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.card h3 { margin: 0; font-size: 20px; line-height: 1.2; }
+.place { margin: 2px 0 0; color: var(--text-light); font-size: 15px; }
+.rent { margin: 0; font-size: 22px; font-weight: 700; white-space: nowrap; }   
+/* nowrap keeps "KES 8,500" on one line */
+
+.rent small { font-size: 14px; font-weight: 500; color: var(--text-light); }
+ 
+/* Small pill-shaped labels: bedrooms and verified status */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.badge { padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #f1e8d6; }
+.badge.ok { background: var(--green-light); color: var(--green); }   
+/* Verified */
+.badge.no { background: #ece6d9; color: var(--text-light); }          
+/* Not verified yet */
+ 
+.manager { margin: 10px 0 0; font-size: 15px; }
+.confirmed { margin: 2px 0 0; font-size: 14px; color: var(--text-light); }
+ 
