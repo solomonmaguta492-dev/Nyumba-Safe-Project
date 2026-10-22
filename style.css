@@ -16,3 +16,24 @@
   --border: #e6dcc8;          
   --sand: #cbbfa6;            
 }
+
+/* base styles */
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito Sans", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+/*Headings, the brand name and the rent use the second font*/
+
+h1, h2, h3, .brand, .rent {font-family: "Outfit", system ui, sans-serif;}
+
+/* .wrap centres content and stops it getting too wide on big screens */
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+ 
