@@ -186,6 +186,29 @@ dialog::backdrop { background: rgba(43, 43, 43, 0.5); }
 /* "Skip to listings" link: off-screen until a keyboard user tabs to it */
 .skip-link { position: absolute; left: 12px; top: -60px; z-index: 3000; padding: 8px 14px; background: #fff; color: var(--green); border-radius: 8px; font-weight: 600; }
 .skip-link:focus { top: 12px; }
+
+/*FOOTER*/
+.site-footer { padding: 20px 0 32px; color: var(--text-light); font-size: 14px; border-top: 1px solid var(--border); }
  
+/* Mobile: stack the paired form fields */
+@media (max-width: 520px) {
+  .two-col { grid-template-columns: 1fr; }
+  .rent { font-size: 20px; }
+}
+ 
+/* Tablet: more room, so make the map taller */
+@media (min-width: 521px) and (max-width: 959px) {
+  #map { height: 360px; }
+}
+ 
+/* Desktop: two columns. The map stays in view while you scroll the listings. */
+@media (min-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .map-col { order: 0; position: sticky; top: 16px; align-self: start; }
+  #map { height: calc(100vh - 60px); min-height: 420px; }
+}
+ 
+/* Respect people who turn off animations in their system settings */
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
 
 
