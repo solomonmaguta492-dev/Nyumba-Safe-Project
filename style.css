@@ -148,4 +148,21 @@ input, select, textarea {
 
 .empty { padding: 24px; background: var(--white); border: 1px dashed var(--border); border-radius: 12px; color: var(--text-light); }
 
+/*POP UP FORMS (DIALOG)*/
+/* min(520px, 94vw) keeps the dialog within the screen on phones */
+dialog { border: none; border-radius: 14px; padding: 0; width: min(520px, 94vw); max-height: 92vh; }
+dialog::backdrop { background: rgba(43, 43, 43, 0.5); }   
+
+/* dark layer behind the pop-up */
+.dialog-form { display: grid; gap: 12px; padding: 20px; }
+.dialog-form h2 { margin: 0; font-size: 22px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } 
+
+/* two fields side by side */
+.report-target { margin: 0; color: var(--text-light); }
+
+/* min-height reserves space so the form does not jump when an error message appears */
+.field-error { min-height: 1.1em; color: var(--terracotta); font-size: 13px; font-weight: 600; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
 
