@@ -53,3 +53,20 @@ h1, h2, h3, .brand, .rent {font-family: "Outfit", system ui, sans-serif;}
 .safety { display: inline-block; margin: 0; padding: 7px 12px; border-radius: 8px; background: #f8e1d8; color: #8a3320; font-weight: 600; font-size: 15px; 
 }
 
+/*Filter bar and form fields*/
+
+/* auto-fit grid: as many 170px-or-wider columns as fit, so the filters wrap on small screens */
+.filter {
+  
+}
+
+/* Each label sits above its input*/
+label {display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--text-light); font-weight: 600; }
+
+input, select, textarea {
+  font: inherit; color: var(--text); padding: 9px 10px; width: 100%;
+  border: 1px solid var(--border); border-radius: 8px; background: #fff;
+}
+
+.count {margin: 10px 0 14px; color: var(--text-light); font-weight: 600; }
+
