@@ -37,3 +37,19 @@ h1, h2, h3, .brand, .rent {font-family: "Outfit", system ui, sans-serif;}
 
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
  
+/*Header*/
+.site-header {
+   background:
+    linear-gradient(90deg, rgba(23, 69, 50, 0.96) 0%, rgba(23, 69, 50, 0.78) 50%, rgba(23, 69, 50, 0.2) 100%),
+    url("images/header-bg.svg") center bottom / cover no-repeat;
+  background-color: var(--green);   /* shown if the picture does not load */
+  color: #fff;
+  padding: 34px 0 30px;
+}
+.brand { margin: 0 0 4px; font-weight: 700; font-size: 18px; color: var(--gold); }
+/* clamp(min, preferred, max) makes the heading shrink on phones and grow on desktops */
+.site-header h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
+.tagline { margin: 8px 0 14px; max-width: 60ch; color: var(--bg); }
+.safety { display: inline-block; margin: 0; padding: 7px 12px; border-radius: 8px; background: #f8e1d8; color: #8a3320; font-weight: 600; font-size: 15px; 
+}
+
