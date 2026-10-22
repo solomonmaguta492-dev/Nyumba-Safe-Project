@@ -174,6 +174,18 @@ dialog::backdrop { background: rgba(43, 43, 43, 0.5); }
 }
 .toast.show { opacity: 1; }
 .toast.error { background: var(--terracotta); }
+
+/*ACCESSIBILITY*/
+
+/* Visible outline when someone navigates with the keyboard */
+:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+ 
+/* Hides text visually but keeps it for screen readers (used for the results heading) */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+ 
+/* "Skip to listings" link: off-screen until a keyboard user tabs to it */
+.skip-link { position: absolute; left: 12px; top: -60px; z-index: 3000; padding: 8px 14px; background: #fff; color: var(--green); border-radius: 8px; font-weight: 600; }
+.skip-link:focus { top: 12px; }
  
 
 
