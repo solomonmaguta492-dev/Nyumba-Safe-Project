@@ -194,3 +194,8 @@ results.addEventListener("click", async (e) => {
     }
   }
 });
+
+// Filter events.
+["search", "max-rent"].forEach((id) => $(id).addEventListener("input", render));
+["area", "bedrooms"].forEach((id) => $(id).addEventListener("change", render));
+
