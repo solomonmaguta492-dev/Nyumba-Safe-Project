@@ -29,3 +29,6 @@ export const replaceListing = (id, data) =>
 // PATCH changes only the fields you send.
 export const patchListing = (id, data) =>
   request(`/listings/${id}`, { method: "PATCH", body: JSON.stringify(data) });
+//DELETE for deleting listing
+export const deleteListing = (id) =>
+  request(`/listings/${id}`, { method: "DELETE" });
