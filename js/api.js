@@ -17,3 +17,7 @@ async function request(path, options = {}) {
 
 //GET for get listing
 export const getListings = () => request("/listings");
+
+// POST creates listing
+export const createListing = (data) =>
+  request("/listings", { method: "POST", body: JSON.stringify(data) });
