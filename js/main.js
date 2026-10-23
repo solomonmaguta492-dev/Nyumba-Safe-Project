@@ -21,3 +21,30 @@ let reportingId = null;
 const findById = (id) => listings.find((l) => String(l.id) === String(id));
 
 // Filters.
+function currentFilters() {
+  return {
+    search: $("search").value,
+    area: $("area").value,
+    maxRent: $("max-rent").value,
+    bedrooms: $("bedrooms").value,
+  };
+}
+
+function render() {
+  const shown = applyFilters(listings, currentFilters());
+  renderCards(results, shown);
+  showPins(shown);
+  setCount(shown.length, listings.length);
+}
+
+async function load() {
+  showMessage(results, "Loading houses...");
+  try {
+    listings = await getListings();
+    fillAreaSelect($("area"), getAreas(listings));
+    render();
+  } catch {
+    showMessage(results, "Could not load houses. Check that the API is running (npm run api).");
+    setCount(0, 0);
+  }
+}
