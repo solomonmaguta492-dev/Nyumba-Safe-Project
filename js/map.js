@@ -39,3 +39,11 @@ export function showPins(listings) {
 
   if (points.length) map.fitBounds(points, { padding: [30, 30], maxZoom: 15 });
 }
+
+// Called when a card is clicked: move the map to its pin.
+export function focusPin(id) {
+  const pin = pins.get(String(id));
+  if (!pin) return;
+  map.setView(pin.getLatLng(), Math.max(map.getZoom(), 15));
+  pin.openPopup();
+}
