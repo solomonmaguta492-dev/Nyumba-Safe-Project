@@ -206,3 +206,8 @@ $("clear").addEventListener("click", () => {
   $("filters").reset();
   render();
 });
+
+// Start.
+initMap((id) => setActiveCard(id));
+load();
+window.addEventListener("load", refreshMap);
