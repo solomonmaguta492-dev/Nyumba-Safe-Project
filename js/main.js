@@ -199,3 +199,10 @@ results.addEventListener("click", async (e) => {
 ["search", "max-rent"].forEach((id) => $(id).addEventListener("input", render));
 ["area", "bedrooms"].forEach((id) => $(id).addEventListener("change", render));
 
+// Pressing Enter in a filter box should not reload the page.
+$("filters").addEventListener("submit", (e) => e.preventDefault());
+
+$("clear").addEventListener("click", () => {
+  $("filters").reset();
+  render();
+});
