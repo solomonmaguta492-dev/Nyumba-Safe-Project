@@ -77,3 +77,38 @@ function toListing(v) {
     lng: hasCoords ? Number(v.lng) : null,
   };
 }
+
+/*
+  preventDefault() stops the page from reloading.
+  On edit, PUT replaces the record, so we spread the old one
+  first to keep the id, verified and date.
+*/
+listingForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const errors = validateListing(readForm(listingForm));
+  showErrors(listingForm, errors);
+  if (Object.keys(errors).length) return;
+
+  const data = toListing(readForm(listingForm));
+  const button = listingForm.querySelector('[type="submit"]');
+  button.disabled = true;
+
+  try {
+    if (editingId !== null) {
+      await replaceListing(editingId, { ...findById(editingId), ...data });
+      showToast("Listing updated.");
+    } else {
+      await createListing({ ...data, verified: false, confirmedOn: todayISO() });
+      showToast("Listing added.");
+    }
+    listingDialog.close();
+    await load();
+  } catch {
+    showToast("Could not save the listing. Try again.", true);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("add-listing").addEventListener("click", () => openListingForm());
+$("listing-cancel").addEventListener("click", () => listingDialog.close());
