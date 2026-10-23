@@ -16,3 +16,19 @@ export function bedroomLabel(n) {
   if (n === 0) return "Bedsitter";
   return n === 1 ? "1 bedroom" : `${n} bedrooms`;
 }
+//FORMAT FOR DATE
+export function formatDate(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return "";
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+export function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+export function daysSince(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return Infinity;
+  return Math.floor((Date.now() - d) / 86400000);
+}
