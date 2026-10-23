@@ -32,3 +32,6 @@ export const patchListing = (id, data) =>
 //DELETE for deleting listing
 export const deleteListing = (id) =>
   request(`/listings/${id}`, { method: "DELETE" });
+// for sending report
+export const sendReport = (data) =>
+  request("/reports", { method: "POST", body: JSON.stringify(data) });
