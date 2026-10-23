@@ -47,3 +47,8 @@ export function focusPin(id) {
   map.setView(pin.getLatLng(), Math.max(map.getZoom(), 15));
   pin.openPopup();
 }
+
+// Needed when the map's container changes size.
+export function refreshMap() {
+  if (map) map.invalidateSize();
+}
