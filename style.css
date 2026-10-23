@@ -31,7 +31,7 @@ body {
 
 /*Headings, the brand name and the rent use the second font*/
 
-h1, h2, h3, .brand, .rent {font-family: "Outfit", system ui, sans-serif;}
+h1, h2, h3, .brand, .rent {font-family: "Outfit", system-ui, sans-serif;}
 
 /* .wrap centres content and stops it getting too wide on big screens */
 
@@ -56,7 +56,7 @@ h1, h2, h3, .brand, .rent {font-family: "Outfit", system ui, sans-serif;}
 /*Filter bar and form fields*/
 
 /* auto-fit grid: as many 170px-or-wider columns as fit, so the filters wrap on small screens */
-.filter {
+.filters {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 14px; align-items: end; margin: 22px 0 8px; padding: 16px;
   background: var(--white); border: 1px solid var(--border); border-radius: 12px;
@@ -199,6 +199,7 @@ dialog::backdrop { background: rgba(43, 43, 43, 0.5); }
 /* Tablet: more room, so make the map taller */
 @media (min-width: 521px) and (max-width: 959px) {
   #map { height: 360px; }
+  #map { height: 300px; }
 }
  
 /* Desktop: two columns. The map stays in view while you scroll the listings. */

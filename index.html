@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NyumbaSafe: Find a House You Can Trust</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to listing</a>
@@ -57,7 +59,7 @@
       <p id="count" class="count" role="status" aria-live="polite"></p>
 
       <div class="layout">
-        <section class="listing-section" aria-labeledby="result-heading">
+        <section class="listing-section" aria-labelledby="results-heading">
             <h2 id="results-heading" class="sr-only">Available houses</h2>
             <div id="results" class="results"></div>
 
@@ -80,7 +82,7 @@
         <h2 id="listing-title">Add a Listing</h2> 
 
         <label>Apartment Name
-          <input type="name" type="text" maxlength="60">
+          <input name="name" type="text" maxlength="60">
           <span class="field-error" data-error-for="name"></span>
         </label>
 
