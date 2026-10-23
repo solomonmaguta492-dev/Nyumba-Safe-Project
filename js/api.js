@@ -21,3 +21,11 @@ export const getListings = () => request("/listings");
 // POST creates listing
 export const createListing = (data) =>
   request("/listings", { method: "POST", body: JSON.stringify(data) });
+
+// PUT replaces the whole record, so send every field.
+export const replaceListing = (id, data) =>
+  request(`/listings/${id}`, { method: "PUT", body: JSON.stringify(data) });
+
+// PATCH changes only the fields you send.
+export const patchListing = (id, data) =>
+  request(`/listings/${id}`, { method: "PATCH", body: JSON.stringify(data) });
