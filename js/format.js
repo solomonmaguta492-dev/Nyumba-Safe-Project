@@ -32,3 +32,8 @@ export function daysSince(iso) {
   if (isNaN(d)) return Infinity;
   return Math.floor((Date.now() - d) / 86400000);
 }
+
+// 254712345678 becomes 0712345678 for display.
+export function localPhone(phone) {
+  return phone.startsWith("254") ? "0" + phone.slice(3) : phone;
+}
