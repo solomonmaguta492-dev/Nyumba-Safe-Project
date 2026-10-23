@@ -151,3 +151,46 @@ reportForm.addEventListener("submit", async (e) => {
 });
 
 $("report-cancel").addEventListener("click", () => reportDialog.close());
+
+// Clicks on the listing cards (one listener for all buttons).
+results.addEventListener("click", async (e) => {
+  const button = e.target.closest("[data-action]");
+
+  if (!button) {
+    const card = e.target.closest(".card");
+    if (card && !e.target.closest("a")) {
+      setActiveCard(card.dataset.id);
+      focusPin(card.dataset.id);
+    }
+    return;
+  }
+
+  const listing = findById(button.dataset.id);
+  if (!listing) return;
+
+  if (button.dataset.action === "edit") openListingForm(listing);
+  if (button.dataset.action === "report") openReportForm(listing);
+
+  if (button.dataset.action === "confirm") {
+    button.disabled = true;
+    try {
+      await patchListing(listing.id, { confirmedOn: todayISO() });
+      showToast("Marked as confirmed vacant today.");
+      await load();
+    } catch {
+      showToast("Could not update the listing.", true);
+      button.disabled = false;
+    }
+  }
+
+  if (button.dataset.action === "delete") {
+    if (!confirm(`Delete "${listing.name}"? This cannot be undone.`)) return;
+    try {
+      await deleteListing(listing.id);
+      showToast("Listing deleted.");
+      await load();
+    } catch {
+      showToast("Could not delete the listing.", true);
+    }
+  }
+});
