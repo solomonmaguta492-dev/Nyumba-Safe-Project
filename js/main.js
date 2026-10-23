@@ -48,3 +48,15 @@ async function load() {
     setCount(0, 0);
   }
 }
+
+// Add and edit listing form.
+const listingDialog = $("listing-dialog");
+const listingForm = $("listing-form");
+
+function openListingForm(listing = null) {
+  editingId = listing ? listing.id : null;
+  $("listing-title").textContent = listing ? "Edit Listing" : "Add a Listing";
+  clearErrors(listingForm);
+  fillForm(listingForm, listing || {});
+  listingDialog.showModal();
+}
