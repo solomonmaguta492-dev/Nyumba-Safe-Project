@@ -14,3 +14,6 @@ async function request(path, options = {}) {
   const text = await res.text();
   return text ? JSON.parse(text) : null;
 }
+
+//GET for get listing
+export const getListings = () => request("/listings");
