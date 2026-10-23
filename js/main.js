@@ -112,3 +112,42 @@ listingForm.addEventListener("submit", async (e) => {
 
 $("add-listing").addEventListener("click", () => openListingForm());
 $("listing-cancel").addEventListener("click", () => listingDialog.close());
+
+// Report form.
+const reportDialog = $("report-dialog");
+const reportForm = $("report-form");
+
+function openReportForm(listing) {
+  reportingId = listing.id;
+  $("report-target").textContent = `${listing.name}, ${listing.area}`;
+  clearErrors(reportForm);
+  reportForm.reset();
+  reportDialog.showModal();
+}
+
+reportForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const values = readForm(reportForm);
+  const errors = validateReport(values);
+  showErrors(reportForm, errors);
+  if (Object.keys(errors).length) return;
+
+  const button = reportForm.querySelector('[type="submit"]');
+  button.disabled = true;
+  try {
+    await sendReport({
+      listingId: reportingId,
+      reason: values.reason,
+      details: values.details,
+      createdAt: new Date().toISOString(),
+    });
+    reportDialog.close();
+    showToast("Thank you. Your report was sent.");
+  } catch {
+    showToast("Could not send the report. Try again.", true);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("report-cancel").addEventListener("click", () => reportDialog.close());
