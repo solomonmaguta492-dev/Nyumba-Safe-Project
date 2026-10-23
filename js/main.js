@@ -60,3 +60,20 @@ function openListingForm(listing = null) {
   fillForm(listingForm, listing || {});
   listingDialog.showModal();
 }
+
+// Turns the form text into the record we store.
+function toListing(v) {
+  const hasCoords = v.lat !== "" && v.lng !== "";
+  return {
+    name: v.name,
+    area: v.area,
+    location: v.location,
+    bedrooms: Number(v.bedrooms),
+    rent: Number(v.rent),
+    manager: v.manager,
+    phone: normalizePhone(v.phone),
+    facebook: v.facebook,
+    lat: hasCoords ? Number(v.lat) : null,
+    lng: hasCoords ? Number(v.lng) : null,
+  };
+}
