@@ -80,6 +80,7 @@ input, select, textarea {
 .layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 40px; }
  /*move the map above the listing on small screens*/
 .map-col { order: -1; }
+#map { height: 300px; }
 
 /*the map needsa height or it stays invisible*/
 .map-note { margin: 6px 0 0; font-size: 13px; color: var(--text-light); }
@@ -199,7 +200,7 @@ dialog::backdrop { background: rgba(43, 43, 43, 0.5); }
 /* Tablet: more room, so make the map taller */
 @media (min-width: 521px) and (max-width: 959px) {
   #map { height: 360px; }
-  #map { height: 300px; }
+
 }
  
 /* Desktop: two columns. The map stays in view while you scroll the listings. */
