@@ -162,3 +162,25 @@ How they fit together: `main.js` asks `api.js` for the listings, `filters.js` pi
 - Every card and the page header remind users never to pay before viewing.
 - Anything typed into a listing is escaped before it is shown, so it cannot inject HTML.
 - Users can report listings that ask for money early, do not exist, are already taken or have wrong details.
+
+## Roadmap
+
+**MVP 1: Core listings** (done): listings page, contact buttons, search and filters, mobile-friendly design, map.
+
+**MVP 2: Trust features:**
+
+- "Verified" badge, given after confirming the manager by phone
+- "Last confirmed vacant" date, with old listings hidden
+- "Report this listing" button
+- Safety tips on every listing
+
+**MVP 3: Manager accounts:**
+
+- Managers sign up and post their own listings
+- Admin approval before a listing goes live
+- Mark a house as taken or available
+- Backend with Firebase or Supabase
+
+**Later:** saved favourites, reviews from past tenants, and more counties.
+
+**Success measure for MVP 1:** 20 real listings in one area, and 10 people who say it helped them contact a real manager.
