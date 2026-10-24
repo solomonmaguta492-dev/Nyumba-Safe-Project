@@ -125,3 +125,12 @@ Each listing in `db.json` looks like this:
 - a toast area for messages, a `noscript` notice and the footer
 
 It loads Leaflet, then loads `js/main.js` as a module. `main.js` loads all the other JavaScript files.
+
+### CSS
+
+**`style.css`** styles the whole page.
+
+- Colors and the warm green and terracotta theme are set once in `:root` as variables.
+- The layout is mobile first. On small screens there is one column with the map above the listings. At 960px and wider there are two columns, and the map stays in view as you scroll.
+- It also styles the filter bar, listing cards (green top border when verified), buttons, pop-up forms, toast messages, the skip link and the footer.
+- It respects the "reduce motion" setting.
