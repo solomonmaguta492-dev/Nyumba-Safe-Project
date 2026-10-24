@@ -190,3 +190,7 @@ How they fit together: `main.js` asks `api.js` for the listings, `filters.js` pi
 - Anyone can add, edit or delete a listing, because there are no accounts yet.
 - The "Verified" badge is set in the data, not by the site.
 - Listings without coordinates do not appear on the map.
+
+## Credits
+
+Map data by [OpenStreetMap](https://www.openstreetmap.org/) contributors.
