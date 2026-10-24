@@ -15,3 +15,15 @@ This is a student project.
 - **Problem:** Fake listings and agents who demand deposits before a viewing cost house hunters money and time.
 - **Solution:** A searchable directory of real listings, with direct contact details and visible "last confirmed vacant" dates.
 - **Target users:** Tenants (students, workers, families) and apartment managers or small real estate agents.
+
+## Features
+
+- Listing cards with name, area, landmark, rent, bedrooms and manager details
+- WhatsApp (with a ready-made message), Call and Facebook buttons
+- Search by name, and filter by area, maximum rent and bedrooms
+- Map with a pin for each listing (Leaflet and OpenStreetMap)
+- Add, edit and delete listings through pop-up forms with validation
+- "Verified" badge and "Last confirmed vacant" date
+- "Confirm still vacant" button that sets the date to today
+- "Report this listing" form
+- Mobile-friendly layout, keyboard focus styles, a skip link and screen-reader support
