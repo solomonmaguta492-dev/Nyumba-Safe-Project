@@ -134,3 +134,25 @@ It loads Leaflet, then loads `js/main.js` as a module. `main.js` loads all the o
 - The layout is mobile first. On small screens there is one column with the map above the listings. At 960px and wider there are two columns, and the map stays in view as you scroll.
 - It also styles the filter bar, listing cards (green top border when verified), buttons, pop-up forms, toast messages, the skip link and the footer.
 - It respects the "reduce motion" setting.
+
+### JavaScript (`js/`)
+
+Each File and  What it does 
+
+1.config.js -> Settings: API address, map start and zoom, and how many days before an unconfirmed listing is hidden. 
+
+2.api.js -> All requests to the server: get, add, replace, update and delete listings, and send reports. It also checks for 404 and 500 errors. 
+
+3.format.js -> Display helpers: escapes HTML, formats rent, bedrooms, dates and phone numbers. 
+
+4.validators.js -> Form checks: Kenyan phone numbers, required fields, Facebook links and coordinates. 
+
+5.filters.js -> Decides which listings are shown, and builds the list of areas. 
+
+6.ui.js -> Draws the cards, count, area dropdown, active card, toast messages and form errors.
+
+7.map.js -> Creates the Leaflet map, adds pins, and moves the map to a clicked card. 
+
+8.main.js -> Starts the app and connects the filters, forms, card buttons and API. 
+
+How they fit together: `main.js` asks `api.js` for the listings, `filters.js` picks which to show, and `ui.js` and `map.js` draw them.
