@@ -111,3 +111,17 @@ Each listing in `db.json` looks like this:
 - `phone`: stored in the `254...` form, which WhatsApp links need.
 - `facebook`, `lat`, `lng` and `location` are optional.
 - Reports are saved in a `reports` list, so `db.json` needs `"reports": []`.
+
+## File guide
+
+### HTML
+
+**`index.html`** is the single page. It contains:
+
+- the header and the safety message
+- the filter form (search, area, maximum rent, bedrooms, Clear Filters and Add Listing)
+- the results area and the map area
+- two pop-up forms: **Add a Listing** (also used for editing) and **Report this Listing**
+- a toast area for messages, a `noscript` notice and the footer
+
+It loads Leaflet, then loads `js/main.js` as a module. `main.js` loads all the other JavaScript files.
