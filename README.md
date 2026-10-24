@@ -27,3 +27,10 @@ This is a student project.
 - "Confirm still vacant" button that sets the date to today
 - "Report this listing" form
 - Mobile-friendly layout, keyboard focus styles, a skip link and screen-reader support
+
+## Built with
+
+- HTML, CSS and JavaScript (ES modules, no framework)
+- [Leaflet](https://leafletjs.com/) 1.9.4 for the map
+- A Node.js API (`server.js`) with data in `db.json`
+- Google Fonts: Nunito Sans and Outfit
