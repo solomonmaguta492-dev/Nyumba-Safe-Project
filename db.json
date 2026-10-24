@@ -88,8 +88,47 @@
       "lastConfirmed": "2026-10-19",
       "lat": -1.2054,
       "lng": 36.7826,
-      "facebook": "https://www.facebook.com/"
+      "facebook": "https://www.facebook.com/",
+      "confirmedOn": "2026-10-23"
+    },
+    {
+      "name": "SolomonApartment",
+      "area": "karen",
+      "location": "near ngong road",
+      "bedrooms": 4,
+      "rent": 70000,
+      "manager": "Grandi",
+      "phone": "254798913169",
+      "facebook": "",
+      "lat": -1.1019,
+      "lng": 37.0144,
+      "verified": false,
+      "confirmedOn": "2026-10-23",
+      "id": 7
+    },
+    {
+      "name": "Maida Apartments",
+      "area": "South B",
+      "location": "Near south c",
+      "bedrooms": 4,
+      "rent": 80000,
+      "manager": "Yusuf",
+      "phone": "254119229983",
+      "facebook": "",
+      "lat": -1.1019,
+      "lng": 37.0144,
+      "verified": false,
+      "confirmedOn": "2026-10-23",
+      "id": 8
     }
   ],
-  "reports": []
+  "reports": [
+    {
+      "listingId": 6,
+      "reason": "Something else",
+      "details": "FNM,YR,ZMJN\\T",
+      "createdAt": "2026-10-23T09:07:40.464Z",
+      "id": 1
+    }
+  ]
 }
