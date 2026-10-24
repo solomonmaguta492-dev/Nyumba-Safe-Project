@@ -56,3 +56,31 @@ Nyumba-Safe-Project/
     ├── map.js
     └── main.js
 ```
+
+## Getting started
+
+You need [Node.js](https://nodejs.org/) installed.
+
+1. Install the dependencies:
+
+```bash
+   npm install
+```
+
+2. In one terminal, start the API (it runs on port 3000):
+
+```bash
+   npm run api
+```
+
+3. In a second terminal, serve the website:
+
+```bash
+   npx serve .
+```
+
+4. Open the address that `serve` prints, such as `http://localhost:57835`. Port 3000 is used by the API, so `serve` picks another port.
+
+Do not open `index.html` by double-clicking it. The JavaScript uses modules, which only work through a server.
+
+If you change a file and see no difference, save it and press **Ctrl + Shift + R** to bypass the browser cache.
