@@ -34,3 +34,25 @@ This is a student project.
 - [Leaflet](https://leafletjs.com/) 1.9.4 for the map
 - A Node.js API (`server.js`) with data in `db.json`
 - Google Fonts: Nunito Sans and Outfit
+
+## Project structure
+
+```
+Nyumba-Safe-Project/
+├── index.html
+├── style.css
+├── server.js
+├── db.json
+├── package.json
+├── images/
+│   └── header-bg.svg
+└── js/
+    ├── config.js
+    ├── api.js
+    ├── format.js
+    ├── validators.js
+    ├── filters.js
+    ├── ui.js
+    ├── map.js
+    └── main.js
+```
