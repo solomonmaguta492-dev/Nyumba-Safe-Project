@@ -156,3 +156,9 @@ Each File and  What it does
 8.main.js -> Starts the app and connects the filters, forms, card buttons and API. 
 
 How they fit together: `main.js` asks `api.js` for the listings, `filters.js` picks which to show, and `ui.js` and `map.js` draw them.
+
+## Safety
+
+- Every card and the page header remind users never to pay before viewing.
+- Anything typed into a listing is escaped before it is shown, so it cannot inject HTML.
+- Users can report listings that ask for money early, do not exist, are already taken or have wrong details.
