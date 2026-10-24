@@ -84,3 +84,30 @@ You need [Node.js](https://nodejs.org/) installed.
 Do not open `index.html` by double-clicking it. The JavaScript uses modules, which only work through a server.
 
 If you change a file and see no difference, save it and press **Ctrl + Shift + R** to bypass the browser cache.
+
+## Data format
+
+Each listing in `db.json` looks like this:
+
+```json
+{
+  "id": 1,
+  "name": "Sunrise Apartments",
+  "area": "Juja",
+  "location": "Near Gate C",
+  "bedrooms": 1,
+  "rent": 8500,
+  "manager": "Jane Wanjiru",
+  "phone": "254712345678",
+  "facebook": "https://facebook.com/sunrise",
+  "lat": -1.1018,
+  "lng": 37.0144,
+  "verified": true,
+  "confirmedOn": "2026-10-15"
+}
+```
+
+- `bedrooms`: `0` means a bedsitter.
+- `phone`: stored in the `254...` form, which WhatsApp links need.
+- `facebook`, `lat`, `lng` and `location` are optional.
+- Reports are saved in a `reports` list, so `db.json` needs `"reports": []`.
