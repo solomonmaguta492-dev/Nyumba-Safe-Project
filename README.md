@@ -9,3 +9,9 @@ NyumbaSafe ("nyumba" is Swahili for house) is a house-hunting website for Kenya.
 > Never pay a deposit before you have viewed the house.
 
 This is a student project.
+
+## The problem and the solution
+
+- **Problem:** Fake listings and agents who demand deposits before a viewing cost house hunters money and time.
+- **Solution:** A searchable directory of real listings, with direct contact details and visible "last confirmed vacant" dates.
+- **Target users:** Tenants (students, workers, families) and apartment managers or small real estate agents.
