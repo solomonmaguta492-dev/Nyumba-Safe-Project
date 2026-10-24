@@ -184,3 +184,9 @@ How they fit together: `main.js` asks `api.js` for the listings, `filters.js` pi
 **Later:** saved favourites, reviews from past tenants, and more counties.
 
 **Success measure for MVP 1:** 20 real listings in one area, and 10 people who say it helped them contact a real manager.
+
+## Known limits
+
+- Anyone can add, edit or delete a listing, because there are no accounts yet.
+- The "Verified" badge is set in the data, not by the site.
+- Listings without coordinates do not appear on the map.
