@@ -98,7 +98,7 @@ Each listing in `db.json` looks like this:
   "bedrooms": 1,
   "rent": 8500,
   "manager": "Jane Wanjiru",
-  "phone": "254712345678",
+  "phone": "25415436513",
   "facebook": "https://facebook.com/sunrise",
   "lat": -1.1018,
   "lng": 37.0144,
