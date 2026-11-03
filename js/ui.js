@@ -1,3 +1,6 @@
+import { STATIC_MODE } from "./config.js";
+
+
 // Everything that draws on the page.
 import { escapeHtml, formatRent, bedroomLabel, formatDate, localPhone } from "./format.js";
 import { normalizePhone } from "./validators.js";
@@ -23,6 +26,14 @@ function cardHTML(l) {
     ? `<p class="confirmed">Last confirmed vacant: ${escapeHtml(formatDate(l.confirmedOn))}</p>`
     : "";
 
+const reportBtn = `<button type="button" class="text-btn warn" data-action="report" data-id="${id}">Report</button>`;
+const manage = STATIC_MODE
+  ? reportBtn
+  : `<button type="button" class="text-btn" data-action="confirm" data-id="${id}">Confirm still vacant</button>
+     <button type="button" class="text-btn" data-action="edit" data-id="${id}">Edit</button>
+     <button type="button" class="text-btn danger" data-action="delete" data-id="${id}">Delete</button>
+     ${reportBtn}`;
+
   return `
     <article class="card ${l.verified ? "is-verified" : ""}" data-id="${id}">
       <div class="card-head">
@@ -43,7 +54,7 @@ function cardHTML(l) {
         <a class="btn" href="tel:+${escapeHtml(phone)}">Call</a>
         ${facebook}
       </div>
-      <div class="actions manage">
+            <div class="actions manage">${manage}</div>
         <button type="button" class="text-btn" data-action="confirm" data-id="${id}">Confirm still vacant</button>
         <button type="button" class="text-btn" data-action="edit" data-id="${id}">Edit</button>
         <button type="button" class="text-btn danger" data-action="delete" data-id="${id}">Delete</button>
