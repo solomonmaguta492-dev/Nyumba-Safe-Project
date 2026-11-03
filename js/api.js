@@ -1,5 +1,5 @@
-// All talking to the server happens here.
-import { API_URL } from "./config.js";
+// All talking to the server (or the listings file) happens here.
+import { API_URL, STATIC_MODE, LISTINGS_FILE } from "./config.js";
 
 /*
   fetch does not throw on 404 or 500 errors by itself,
@@ -15,10 +15,15 @@ async function request(path, options = {}) {
   return text ? JSON.parse(text) : null;
 }
 
-//GET for get listing
-export const getListings = () => request("/listings");
+// In static mode, read listings.json. It can be a plain list or a copy of db.json.
+export async function getListings() {
+  if (!STATIC_MODE) return request("/listings");
+  const res = await fetch(LISTINGS_FILE);
+  if (!res.ok) throw new Error(`Request failed (${res.status})`);
+  const data = await res.json();
+  return Array.isArray(data) ? data : data.listings;
+}
 
-// POST creates listing
 export const createListing = (data) =>
   request("/listings", { method: "POST", body: JSON.stringify(data) });
 
@@ -29,9 +34,9 @@ export const replaceListing = (id, data) =>
 // PATCH changes only the fields you send.
 export const patchListing = (id, data) =>
   request(`/listings/${id}`, { method: "PATCH", body: JSON.stringify(data) });
-//DELETE for deleting listing
+
 export const deleteListing = (id) =>
   request(`/listings/${id}`, { method: "DELETE" });
-// for sending report
+
 export const sendReport = (data) =>
   request("/reports", { method: "POST", body: JSON.stringify(data) });
