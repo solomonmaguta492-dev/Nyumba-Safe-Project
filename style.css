@@ -122,7 +122,7 @@ input, select, textarea {
 /*BUTTONS*/
 /* Row of contact buttons, then a second row of text actions under a divider */
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.actions.manage { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); gap: 4px 14px; }
+.actions.manage { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); gap: 8px 28px; }
 
 /*Base Button; the variants below only change colors*/
 
