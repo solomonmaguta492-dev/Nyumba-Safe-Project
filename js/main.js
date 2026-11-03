@@ -2,6 +2,7 @@
 import {
   getListings, createListing, replaceListing, patchListing, deleteListing, sendReport,
 } from "./api.js";
+import { OWNER_WHATSAPP, STATIC_MODE } from "./config.js";
 import { applyFilters, getAreas } from "./filters.js";
 import { validateListing, validateReport, normalizePhone } from "./validators.js";
 import { todayISO } from "./format.js";
@@ -44,7 +45,12 @@ async function load() {
     fillAreaSelect($("area"), getAreas(listings));
     render();
   } catch {
-    showMessage(results, "Could not load houses. Check that the API is running (npm run api).");
+    showMessage(
+      results,
+      STATIC_MODE
+        ? "Could not load houses. Check that listings.json is in the project folder."
+        : "Could not load houses. Check that the API is running (npm run api)."
+    );
     setCount(0, 0);
   }
 }
@@ -134,15 +140,17 @@ reportForm.addEventListener("submit", async (e) => {
 
   const button = reportForm.querySelector('[type="submit"]');
   button.disabled = true;
-  try {
-    await sendReport({
-      listingId: reportingId,
-      reason: values.reason,
-      details: values.details,
-      createdAt: new Date().toISOString(),
-    });
+   try {
+    if (!STATIC_MODE) {
+      await sendReport({
+        listingId: reportingId,
+        reason: values.reason,
+        details: values.details,
+        createdAt: new Date().toISOString(),
+      });
+    }
     reportDialog.close();
-    showToast("Thank you. Your report was sent.");
+    showToast("Thank you. Tap Send in WhatsApp to finish your report.");
   } catch {
     showToast("Could not send the report. Try again.", true);
   } finally {
@@ -208,6 +216,8 @@ $("clear").addEventListener("click", () => {
 });
 
 // Start.
+// Start.
+if (STATIC_MODE) $("add-listing").hidden = true;
 initMap((id) => setActiveCard(id));
 load();
 window.addEventListener("load", refreshMap);
