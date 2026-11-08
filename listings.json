@@ -8,7 +8,7 @@
     "rent": 8500,
     "manager": "Jane Wanjiru",
     "phone": "254712345678",
-    "facebook": "https://facebook.com/sunrise",
+    "facebook": "",
     "lat": -1.1018,
     "lng": 37.0144,
     "verified": true,
@@ -39,10 +39,10 @@
     "manager": "Mr. Otieno",
     "phone": "254700000003",
     "verified": true,
-    "lastConfirmed": "2026-10-14",
     "lat": -1.2216,
     "lng": 36.8985,
-    "facebook": "https://www.facebook.com/"
+    "facebook": "",
+    "confirmedOn": "2026-10-14"
   },
   {
     "id": 4,
@@ -54,10 +54,10 @@
     "manager": "Ms. Achieng",
     "phone": "254700000004",
     "verified": false,
-    "lastConfirmed": "2026-10-10",
     "lat": -1.2186,
     "lng": 36.8869,
-    "facebook": ""
+    "facebook": "",
+    "confirmedOn": "2026-10-10"
   },
   {
     "id": 5,
@@ -69,10 +69,10 @@
     "manager": "Mr. Mutua",
     "phone": "254700000005",
     "verified": false,
-    "lastConfirmed": "2026-10-08",
     "lat": -1.1856,
     "lng": 36.9257,
-    "facebook": ""
+    "facebook": "",
+    "confirmedOn": "2026-10-08"
   },
   {
     "id": 6,
@@ -84,10 +84,9 @@
     "manager": "Mrs. Njeri",
     "phone": "254700000006",
     "verified": true,
-    "lastConfirmed": "2026-10-19",
     "lat": -1.2054,
     "lng": 36.7826,
-    "facebook": "https://www.facebook.com/",
+    "facebook": "",
     "confirmedOn": "2026-10-23"
   },
   {
@@ -149,82 +148,5 @@
     "lng": 37.0144,
     "verified": false,
     "confirmedOn": "2026-10-23"
-  },
-  {
-      "id": 2,
-      "name": "Greenview Court",
-      "area": "Juja",
-      "location": "Juja Farm Road",
-      "bedrooms": 1,
-      "rent": 11000,
-      "manager": "Mrs. Wanjiru",
-      "phone": "254115436513",
-      "verified": true,
-      "lastConfirmed": "2026-10-16",
-      "lat": -1.1062,
-      "lng": 37.0201,
-      "facebook": ""
-    },
-    {
-      "id": 3,
-      "name": "Acacia Heights",
-      "area": "Kasarani",
-      "location": "Off Thika Road",
-      "bedrooms": 2,
-      "rent": 22000,
-      "manager": "Mr. Otieno",
-      "phone": "254700000003",
-      "verified": true,
-      "lastConfirmed": "2026-10-14",
-      "lat": -1.2216,
-      "lng": 36.8985,
-      "facebook": "https://www.facebook.com/"
-    },
-    {
-      "id": 4,
-      "name": "Mwangaza Residency",
-      "area": "Roysambu",
-      "location": "3 minutes from Thika Road",
-      "bedrooms": 1,
-      "rent": 15000,
-      "manager": "Ms. Achieng",
-      "phone": "254700000004",
-      "verified": false,
-      "lastConfirmed": "2026-10-10",
-      "lat": -1.2186,
-      "lng": 36.8869,
-      "facebook": ""
-    },
-    {
-      "id": 5,
-      "name": "Baraka Gardens",
-      "area": "Kahawa West",
-      "location": "Near Kenyatta University",
-      "bedrooms": 0,
-      "rent": 7500,
-      "manager": "Mr. Mutua",
-      "phone": "254700000005",
-      "verified": false,
-      "lastConfirmed": "2026-10-08",
-      "lat": -1.1856,
-      "lng": 36.9257,
-      "facebook": ""
-    },
-    {
-      "id": 6,
-      "name": "Ruaka Terrace",
-      "area": "Ruaka",
-      "location": "Off Limuru Road",
-      "bedrooms": 2,
-      "rent": 30000,
-      "manager": "Mrs. Njeri",
-      "phone": "254700000006",
-      "verified": true,
-      "lastConfirmed": "2026-10-19",
-      "lat": -1.2054,
-      "lng": 36.7826,
-      "facebook": "https://www.facebook.com/",
-      "confirmedOn": "2026-10-23"
-    }
-
+  }
 ]
