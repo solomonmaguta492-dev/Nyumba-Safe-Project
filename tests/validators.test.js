@@ -74,6 +74,11 @@ describe("validateListing", () => {
     expect(errors.lng).toBeDefined();
   });
 
+  it("rejects coordinates that are not in the listing's area", () => {
+    const errors = validateListing({ ...good, area: "Ruaka", lat: "-1.1018", lng: "37.0144" });
+    expect(errors.lat).toBe("These coordinates are not in Ruaka.");
+  });
+
   it("accepts coordinates inside Kenya", () => {
     expect(validateListing({ ...good, lat: "-1.1", lng: "37.01" })).toEqual({});
   });

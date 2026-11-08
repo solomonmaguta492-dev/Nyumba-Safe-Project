@@ -37,6 +37,11 @@ describe("applyFilters", () => {
     expect(ids(applyFilters(listings, { ...none, bedrooms: "3" }))).toEqual([4, 5]);
   });
 
+  it("matches the area ignoring case", () => {
+    const mixed = [...listings, { id: 6, name: "Small", area: "juja", rent: 5000, bedrooms: 0 }];
+    expect(ids(applyFilters(mixed, { ...none, area: "Juja" }))).toEqual([1, 2, 6]);
+  });
+
   it("combines filters", () => {
     const result = applyFilters(listings, { ...none, area: "Ruaka", maxRent: "40000" });
     expect(ids(result)).toEqual([4]);
@@ -46,6 +51,10 @@ describe("applyFilters", () => {
 describe("getAreas", () => {
   it("returns each area once, sorted", () => {
     expect(getAreas(listings)).toEqual(["Juja", "Kasarani", "Ruaka"]);
+  });
+
+  it("lists an area once even with different case", () => {
+    expect(getAreas([{ area: "Juja" }, { area: "juja " }, { area: "Karen" }])).toEqual(["Juja", "Karen"]);
   });
 
   it("skips listings with no area", () => {

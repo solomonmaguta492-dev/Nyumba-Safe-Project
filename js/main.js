@@ -34,7 +34,7 @@ function currentFilters() {
 function render() {
   const shown = applyFilters(listings, currentFilters());
   renderCards(results, shown);
-  showPins(shown);
+  showPins(shown, $("area").value);
   setCount(shown.length, listings.length);
 }
 

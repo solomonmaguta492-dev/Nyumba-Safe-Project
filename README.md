@@ -54,6 +54,7 @@ Nyumba-Safe-Project/
     ├── format.js
     ├── validators.js
     ├── filters.js
+    ├── areas.js
     ├── ui.js
     ├── map.js
     └── main.js
@@ -124,7 +125,7 @@ Each listing in `db.json` looks like this:
 
 - `bedrooms`: `0` means a bedsitter.
 - `phone`: stored in the `254...` form, which WhatsApp links need.
-- `facebook`, `lat`, `lng` and `location` are optional.
+- `facebook`, `lat`, `lng` and `location` are optional. Without `lat` and `lng`, the pin goes to the centre of the area. Coordinates more than 8 km from the area are ignored.
 - Reports are saved in a `reports` list, so `db.json` needs `"reports": []`.
 
 ## File guide
@@ -159,6 +160,7 @@ It loads Leaflet, then loads `js/main.js` as a module. `main.js` loads all the o
 | `format.js` | Display helpers: escapes HTML, formats rent, bedrooms, dates and phone numbers, and builds the WhatsApp report link. |
 | `validators.js` | Form checks: Kenyan phone numbers, required fields, Facebook links and coordinates. |
 | `filters.js` | Decides which listings are shown, and builds the list of areas. |
+| `areas.js` | Known areas (Juja, Ruaka, Karen...) and their centre points. Puts each pin inside its own area, even if a listing's coordinates are missing or wrong. |
 | `ui.js` | Draws the cards, count, area dropdown, active card, toast messages and form errors. |
 | `map.js` | Creates the Leaflet map, adds pins, and moves the map to a clicked card. |
 | `main.js` | Starts the app and connects the filters, forms, card buttons and API. |
@@ -197,7 +199,7 @@ How they fit together: `main.js` asks `api.js` for the listings, `filters.js` pi
 
 - Anyone can add, edit or delete a listing, because there are no accounts yet.
 - The "Verified" badge is set in the data, not by the site.
-- Listings without coordinates do not appear on the map.
+- A listing with no coordinates is pinned at the centre of its area. Areas not in `js/areas.js` need their own coordinates to show on the map.
 
 ## Credits
 

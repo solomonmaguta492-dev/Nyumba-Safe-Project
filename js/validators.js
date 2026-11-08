@@ -1,3 +1,5 @@
+import { isOutsideArea } from "./areas.js";
+
 // Checks the form values before anything is sent to the server.
 
 /*
@@ -57,6 +59,9 @@ export function validateListing(v) {
     const lng = Number(v.lng);
     if (!(lat >= -5 && lat <= 5.5)) errors.lat = "Latitude should be between -5 and 5.5.";
     if (!(lng >= 33 && lng <= 42)) errors.lng = "Longitude should be between 33 and 42.";
+    if (!errors.lat && !errors.lng && isOutsideArea(v.area, lat, lng)) {
+      errors.lat = `These coordinates are not in ${String(v.area).trim()}.`;
+    }
   }
 
   return errors;

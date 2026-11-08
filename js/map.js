@@ -1,6 +1,7 @@
 // The Leaflet map. Leaflet is loaded in index.html as the global L.
 import { MAP_CENTER, MAP_ZOOM } from "./config.js";
 import { escapeHtml } from "./format.js";
+import { pinPoint, areaCenter } from "./areas.js";
 
 let map;
 let pinLayer;
@@ -17,19 +18,18 @@ export function initMap(pinClickHandler) {
   pinLayer = L.layerGroup().addTo(map);
 }
 
-function hasCoords(l) {
-  const ok = (v) => v !== null && v !== undefined && v !== "" && Number.isFinite(Number(v));
-  return ok(l.lat) && ok(l.lng);
-}
-
-// Listings without coordinates are skipped.
-export function showPins(listings) {
+/*
+  Pins use pinPoint, so a listing always lands in its own area.
+  When an area is chosen, the map moves to that area.
+*/
+export function showPins(listings, area = "all") {
   pinLayer.clearLayers();
   pins.clear();
   const points = [];
 
-  listings.filter(hasCoords).forEach((l) => {
-    const point = [Number(l.lat), Number(l.lng)];
+  listings.forEach((l) => {
+    const point = pinPoint(l);
+    if (!point) return;
     const pin = L.marker(point).addTo(pinLayer);
     pin.bindPopup(`<strong>${escapeHtml(l.name)}</strong><br>${escapeHtml(l.area)}`);
     pin.on("click", () => onPinClick(l.id));
@@ -37,7 +37,9 @@ export function showPins(listings) {
     points.push(point);
   });
 
+  const center = area === "all" ? null : areaCenter(area);
   if (points.length) map.fitBounds(points, { padding: [30, 30], maxZoom: 15 });
+  else if (center) map.setView(center, 14);
 }
 
 // Called when a card is clicked: move the map to its pin.
