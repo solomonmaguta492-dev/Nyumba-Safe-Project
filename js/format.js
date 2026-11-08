@@ -20,7 +20,10 @@ export function bedroomLabel(n) {
 export function formatDate(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return "";
-  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  // "2026-10-18" is read as UTC, so show it in UTC or it can slip a day.
+  return d.toLocaleDateString("en-GB", {
+    day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+  });
 }
 
 export function todayISO() {
