@@ -33,6 +33,17 @@ export function daysSince(iso) {
   return Math.floor((Date.now() - d) / 86400000);
 }
 
+// Builds the wa.me link that sends a report to the site owner.
+export function reportWhatsAppLink(ownerPhone, listing, reason, details = "") {
+  const lines = [
+    "NyumbaSafe report",
+    `Listing: ${listing.name}, ${listing.area} (id ${listing.id})`,
+    `Reason: ${reason}`,
+  ];
+  if (details) lines.push(`Details: ${details}`);
+  return `https://wa.me/${ownerPhone}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
 // 254712345678 becomes 0712345678 for display.
 export function localPhone(phone) {
   return phone.startsWith("254") ? "0" + phone.slice(3) : phone;

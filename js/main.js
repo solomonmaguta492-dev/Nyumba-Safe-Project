@@ -5,7 +5,7 @@ import {
 import { OWNER_WHATSAPP, STATIC_MODE } from "./config.js";
 import { applyFilters, getAreas } from "./filters.js";
 import { validateListing, validateReport, normalizePhone } from "./validators.js";
-import { todayISO } from "./format.js";
+import { todayISO, reportWhatsAppLink } from "./format.js";
 import { initMap, showPins, focusPin, refreshMap } from "./map.js";
 import {
   renderCards, showMessage, setCount, fillAreaSelect, setActiveCard, showToast,
@@ -140,7 +140,16 @@ reportForm.addEventListener("submit", async (e) => {
 
   const button = reportForm.querySelector('[type="submit"]');
   button.disabled = true;
-   try {
+
+  // Open WhatsApp before any await, or the browser may block the new tab.
+  const listing = findById(reportingId);
+  window.open(
+    reportWhatsAppLink(OWNER_WHATSAPP, listing, values.reason, values.details),
+    "_blank",
+    "noopener"
+  );
+
+  try {
     if (!STATIC_MODE) {
       await sendReport({
         listingId: reportingId,
@@ -215,7 +224,6 @@ $("clear").addEventListener("click", () => {
   render();
 });
 
-// Start.
 // Start.
 if (STATIC_MODE) $("add-listing").hidden = true;
 initMap((id) => setActiveCard(id));
