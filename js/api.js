@@ -38,5 +38,9 @@ export const patchListing = (id, data) =>
 export const deleteListing = (id) =>
   request(`/listings/${id}`, { method: "DELETE" });
 
+// Houses sent by owners wait in "submissions" until the site owner checks them.
+export const submitListing = (data) =>
+  request("/submissions", { method: "POST", body: JSON.stringify(data) });
+
 export const sendReport = (data) =>
   request("/reports", { method: "POST", body: JSON.stringify(data) });

@@ -21,6 +21,10 @@
         <p class="safety">
           Never pay a deposit before you have viewed the house.
         </p>
+        <p class="owner-cta">
+          Own or manage a house?
+          <button type="button" id="list-house" class="btn btn-primary">List your house</button>
+        </p>
       </div>
     </header>
 
@@ -79,7 +83,11 @@
 
     <dialog id="listing-dialog">
         <form id="listing-form" class="dialog-form" novalidate>
-        <h2 id="listing-title">Add a Listing</h2> 
+        <h2 id="listing-title">Add a Listing</h2>
+        <p id="listing-note" class="form-note" hidden>
+          Fill in your house details. WhatsApp will open with them ready to send to NyumbaSafe.
+          Your listing goes live after we check it.
+        </p>
 
         <label>Apartment Name
           <input name="name" type="text" maxlength="60">
@@ -143,7 +151,7 @@
       </div>
       <div class="dialog-actions">
         <button type="button" id="listing-cancel" class="btn">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save listing</button>
+        <button type="submit" id="listing-submit" class="btn btn-primary">Save listing</button>
       </div>
     </form>
   </dialog>

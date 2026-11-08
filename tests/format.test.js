@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import {
   escapeHtml, formatRent, bedroomLabel, formatDate, todayISO,
-  daysSince, localPhone, reportWhatsAppLink,
+  daysSince, localPhone, reportWhatsAppLink, submissionWhatsAppLink,
 } from "../js/format.js";
 
 afterEach(() => vi.useRealTimers());
@@ -81,5 +81,43 @@ describe("reportWhatsAppLink", () => {
   it("adds details when given", () => {
     const link = reportWhatsAppLink("254798913169", listing, "Other", "Asked for a deposit");
     expect(decodeURIComponent(link)).toContain("Details: Asked for a deposit");
+  });
+});
+
+describe("submissionWhatsAppLink", () => {
+  const house = {
+    name: "Ruaka Terrace",
+    area: "Ruaka",
+    location: "Off Limuru Road",
+    bedrooms: 2,
+    rent: 25000,
+    manager: "Mary",
+    phone: "254712345678",
+    facebook: "",
+    lat: null,
+    lng: null,
+  };
+  const text = (link) => decodeURIComponent(link.split("?text=")[1]);
+
+  it("sends all the house details to the owner", () => {
+    const link = submissionWhatsAppLink("254798913169", house);
+    expect(link.startsWith("https://wa.me/254798913169?text=")).toBe(true);
+    expect(text(link)).toBe(
+      "New house for NyumbaSafe\n" +
+        "Name: Ruaka Terrace\n" +
+        "Area: Ruaka (Off Limuru Road)\n" +
+        "Bedrooms: 2 bedrooms\n" +
+        "Rent: KES 25,000 per month\n" +
+        "Manager: Mary, 0712345678"
+    );
+  });
+
+  it("adds Facebook and map lines when given", () => {
+    const link = submissionWhatsAppLink("254798913169", {
+      ...house, location: "", facebook: "https://facebook.com/ruaka", lat: -1.2054, lng: 36.7826,
+    });
+    expect(text(link)).toContain("Area: Ruaka\n");
+    expect(text(link)).toContain("Facebook: https://facebook.com/ruaka");
+    expect(text(link)).toContain("Map: -1.2054, 36.7826");
   });
 });

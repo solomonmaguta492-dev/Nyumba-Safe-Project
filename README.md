@@ -23,6 +23,7 @@ This is a student project.
 - Add, edit and delete listings through pop-up forms with validation
 - "Verified" badge and "Last confirmed vacant" date
 - "Confirm still vacant" button that sets the date to today
+- "List your house" form for owners: it opens WhatsApp with the house details ready to send to the site owner, and the house goes live only after it is checked
 - "Report this listing" form that sends the report to the site owner on WhatsApp
 - Mobile-friendly layout, keyboard focus styles, a skip link and screen-reader support
 
@@ -127,6 +128,7 @@ Each listing in `db.json` looks like this:
 - `phone`: stored in the `254...` form, which WhatsApp links need.
 - `facebook`, `lat`, `lng` and `location` are optional. Without `lat` and `lng`, the pin goes to the centre of the area. Coordinates more than 8 km from the area are ignored.
 - Reports are saved in a `reports` list, so `db.json` needs `"reports": []`.
+- Houses sent by owners are saved in a `submissions` list (API mode only), so `db.json` needs `"submissions": []`. They are not shown on the site until you add them as listings.
 
 ## File guide
 
@@ -157,7 +159,7 @@ It loads Leaflet, then loads `js/main.js` as a module. `main.js` loads all the o
 |---|---|
 | `config.js` | Settings: API address, map start and zoom, and how many days before an unconfirmed listing is hidden. |
 | `api.js` | All requests to the server: get, add, replace, update and delete listings, and send reports. It also checks for 404 and 500 errors. |
-| `format.js` | Display helpers: escapes HTML, formats rent, bedrooms, dates and phone numbers, and builds the WhatsApp report link. |
+| `format.js` | Display helpers: escapes HTML, formats rent, bedrooms, dates and phone numbers, and builds the WhatsApp links for reports and new houses. |
 | `validators.js` | Form checks: Kenyan phone numbers, required fields, Facebook links and coordinates. |
 | `filters.js` | Decides which listings are shown, and builds the list of areas. |
 | `areas.js` | Known areas (Juja, Ruaka, Karen...) and their centre points. Puts each pin inside its own area, even if a listing's coordinates are missing or wrong. |

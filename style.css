@@ -49,6 +49,9 @@ h1, h2, h3, .brand, .rent {font-family: "Outfit", system-ui, sans-serif;}
 .brand { margin: 0 0 4px; font-weight: 700; font-size: 18px; color: var(--gold); }
 /* clamp(min, preferred, max) makes the heading shrink on phones and grow on desktops */
 .site-header h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
+/* "List your house" call to action under the safety note */
+.owner-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 16px 0 0; color: var(--bg); font-weight: 600; }
+.form-note { margin: 0; padding: 10px 12px; border-radius: 8px; background: #e6f0ea; color: var(--text); font-size: 14px; }
 .tagline { margin: 8px 0 14px; max-width: 60ch; color: var(--bg); }
 .safety { display: inline-block; margin: 0; padding: 7px 12px; border-radius: 8px; background: #f8e1d8; color: #8a3320; font-weight: 600; font-size: 15px; 
 }

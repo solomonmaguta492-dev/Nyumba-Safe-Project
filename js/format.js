@@ -47,6 +47,21 @@ export function reportWhatsAppLink(ownerPhone, listing, reason, details = "") {
   return `https://wa.me/${ownerPhone}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
+// Builds the wa.me link that sends a new house to the site owner.
+export function submissionWhatsAppLink(ownerPhone, l) {
+  const lines = [
+    "New house for NyumbaSafe",
+    `Name: ${l.name}`,
+    `Area: ${l.area}${l.location ? ` (${l.location})` : ""}`,
+    `Bedrooms: ${bedroomLabel(l.bedrooms)}`,
+    `Rent: ${formatRent(l.rent)} per month`,
+    `Manager: ${l.manager}, ${localPhone(l.phone)}`,
+  ];
+  if (l.facebook) lines.push(`Facebook: ${l.facebook}`);
+  if (l.lat !== null && l.lng !== null) lines.push(`Map: ${l.lat}, ${l.lng}`);
+  return `https://wa.me/${ownerPhone}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
 // 254712345678 becomes 0712345678 for display.
 export function localPhone(phone) {
   return phone.startsWith("254") ? "0" + phone.slice(3) : phone;

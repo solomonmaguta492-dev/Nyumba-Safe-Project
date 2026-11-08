@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   getListings, createListing, replaceListing, patchListing, deleteListing, sendReport,
+  submitListing,
 } from "../js/api.js";
 import { API_URL, LISTINGS_FILE } from "../js/config.js";
 
@@ -71,6 +72,13 @@ describe("write requests", () => {
     const fetch = mockFetch({ id: 1 }, 201);
     await sendReport({ listingId: 1, reason: "Fake" });
     expect(fetch.mock.calls[0][0]).toBe(`${API_URL}/reports`);
+  });
+
+  it("POSTs an owner's house to submissions", async () => {
+    const fetch = mockFetch({ id: 1 }, 201);
+    await submitListing({ name: "New" });
+    expect(fetch.mock.calls[0][0]).toBe(`${API_URL}/submissions`);
+    expect(fetch.mock.calls[0][1].method).toBe("POST");
   });
 
   it("throws on a server error", async () => {
