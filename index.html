@@ -9,9 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to listing</a>
+    <a class="skip-link" href="#main">Skip to listings</a>
     <header class="site-header">
-      <div class="wrap">
+      <div class="wrap header-grid">
+        <div class="header-text">
         <p class="brand">NyumbaSafe</p>
         <h1>Find a House You Can Trust</h1>
         <p class="tagline">
@@ -21,13 +22,19 @@
         <p class="safety">
           Never pay a deposit before you have viewed the house.
         </p>
+        </div>
+        <aside class="owner-cta" aria-labelledby="owner-cta-title">
+          <p id="owner-cta-title" class="owner-cta-title">Own or manage a house?</p>
+          <p class="owner-cta-text">List it free on NyumbaSafe. We check it, then it goes live.</p>
+          <button type="button" id="list-house" class="btn btn-primary btn-big">List your house</button>
+        </aside>
       </div>
     </header>
 
     <main id="main" class="wrap">
       <form id="filters" class="filters" aria-label="filter houses">
         <label>Search by Name
-          <input type="search" id="search" aria-placeholder="e.g. Sunrise" />
+          <input type="search" id="search" placeholder="e.g. Sunrise" />
         </label>
         <label>Area
           <select id="area">
@@ -40,7 +47,7 @@
             id="max-rent"
             min="0"
             step="500"
-            aria-placeholder="e.g. 15000"
+            placeholder="e.g. 15000"
           />
         </label>
         <label>Bedrooms
@@ -79,7 +86,11 @@
 
     <dialog id="listing-dialog">
         <form id="listing-form" class="dialog-form" novalidate>
-        <h2 id="listing-title">Add a Listing</h2> 
+        <h2 id="listing-title">Add a Listing</h2>
+        <p id="listing-note" class="form-note" hidden>
+          Fill in your house details. WhatsApp will open with them ready to send to NyumbaSafe.
+          Your listing goes live after we check it.
+        </p>
 
         <label>Apartment Name
           <input name="name" type="text" maxlength="60">
@@ -143,7 +154,7 @@
       </div>
       <div class="dialog-actions">
         <button type="button" id="listing-cancel" class="btn">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save listing</button>
+        <button type="submit" id="listing-submit" class="btn btn-primary">Save listing</button>
       </div>
     </form>
   </dialog>

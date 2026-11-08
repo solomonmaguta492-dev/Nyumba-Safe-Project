@@ -18,7 +18,7 @@ export function applyFilters(listings, filters) {
   return listings.filter((l) => {
     if (!isFresh(l)) return false;
     if (search && !String(l.name).toLowerCase().includes(search)) return false;
-    if (filters.area !== "all" && l.area !== filters.area) return false;
+    if (filters.area !== "all" && areaKey(l.area) !== areaKey(filters.area)) return false;
     if (maxRent !== null && Number(l.rent) > maxRent) return false;
     if (filters.bedrooms !== "any") {
       const wanted = Number(filters.bedrooms);
@@ -29,7 +29,15 @@ export function applyFilters(listings, filters) {
   });
 }
 
+// "juja" and "Juja " count as the same area.
+const areaKey = (area) => String(area ?? "").trim().toLowerCase();
+
 // A sorted list of the areas that exist, for the Area dropdown.
 export function getAreas(listings) {
-  return [...new Set(listings.map((l) => l.area).filter(Boolean))].sort();
+  const byKey = new Map();
+  listings.forEach((l) => {
+    const name = String(l.area ?? "").trim();
+    if (name && !byKey.has(name.toLowerCase())) byKey.set(name.toLowerCase(), name);
+  });
+  return [...byKey.values()].sort((a, b) => a.localeCompare(b));
 }

@@ -1,7 +1,5 @@
 # NyumbaSafe
 
-# NyumbaSafe
-
 **Find a house you can trust.**
 
 NyumbaSafe ("nyumba" is Swahili for house) is a house-hunting website for Kenya. It helps people find rental houses and apartments without being scammed. Every listing shows the apartment name, location, rent, details and the manager's contact. Tenants can reach managers directly through WhatsApp, a phone call or Facebook.
@@ -25,7 +23,8 @@ This is a student project.
 - Add, edit and delete listings through pop-up forms with validation
 - "Verified" badge and "Last confirmed vacant" date
 - "Confirm still vacant" button that sets the date to today
-- "Report this listing" form
+- "List your house" form for owners: it opens WhatsApp with the house details ready to send to the site owner, and the house goes live only after it is checked
+- "Report this listing" form that sends the report to the site owner on WhatsApp
 - Mobile-friendly layout, keyboard focus styles, a skip link and screen-reader support
 
 ## Built with
@@ -43,15 +42,20 @@ Nyumba-Safe-Project/
 ├── style.css
 ├── server.js
 ├── db.json
+├── listings.json
+├── vitest.config.js
 ├── package.json
 ├── images/
 │   └── header-bg.svg
+├── tests/
+│   └── *.test.js
 └── js/
     ├── config.js
     ├── api.js
     ├── format.js
     ├── validators.js
     ├── filters.js
+    ├── areas.js
     ├── ui.js
     ├── map.js
     └── main.js
@@ -81,9 +85,22 @@ You need [Node.js](https://nodejs.org/) installed.
 
 4. Open the address that `serve` prints, such as `http://localhost:57835`. Port 3000 is used by the API, so `serve` picks another port.
 
+**Static mode:** `STATIC_MODE` in `js/config.js` is `true` by default. The site then reads `listings.json` and you only need step 3. Set it to `false` to use the API, which turns on Add, Edit, Delete and Confirm.
+
 Do not open `index.html` by double-clicking it. The JavaScript uses modules, which only work through a server.
 
 If you change a file and see no difference, save it and press **Ctrl + Shift + R** to bypass the browser cache.
+
+## Running the tests
+
+The tests use [Vitest](https://vitest.dev/) and live in the `tests/` folder.
+
+```bash
+npm test
+npm run coverage
+```
+
+`npm run coverage` prints a coverage table and writes a full report to `coverage/index.html`.
 
 ## Data format
 
@@ -98,7 +115,7 @@ Each listing in `db.json` looks like this:
   "bedrooms": 1,
   "rent": 8500,
   "manager": "Jane Wanjiru",
-  "phone": "25415436513",
+  "phone": "254115436513",
   "facebook": "https://facebook.com/sunrise",
   "lat": -1.1018,
   "lng": 37.0144,
@@ -109,8 +126,9 @@ Each listing in `db.json` looks like this:
 
 - `bedrooms`: `0` means a bedsitter.
 - `phone`: stored in the `254...` form, which WhatsApp links need.
-- `facebook`, `lat`, `lng` and `location` are optional.
+- `facebook`, `lat`, `lng` and `location` are optional. Without `lat` and `lng`, the pin goes to the centre of the area. Coordinates more than 8 km from the area are ignored.
 - Reports are saved in a `reports` list, so `db.json` needs `"reports": []`.
+- Houses sent by owners are saved in a `submissions` list (API mode only), so `db.json` needs `"submissions": []`. They are not shown on the site until you add them as listings.
 
 ## File guide
 
@@ -137,23 +155,17 @@ It loads Leaflet, then loads `js/main.js` as a module. `main.js` loads all the o
 
 ### JavaScript (`js/`)
 
-Each File and  What it does 
-
-1.config.js -> Settings: API address, map start and zoom, and how many days before an unconfirmed listing is hidden. 
-
-2.api.js -> All requests to the server: get, add, replace, update and delete listings, and send reports. It also checks for 404 and 500 errors. 
-
-3.format.js -> Display helpers: escapes HTML, formats rent, bedrooms, dates and phone numbers. 
-
-4.validators.js -> Form checks: Kenyan phone numbers, required fields, Facebook links and coordinates. 
-
-5.filters.js -> Decides which listings are shown, and builds the list of areas. 
-
-6.ui.js -> Draws the cards, count, area dropdown, active card, toast messages and form errors.
-
-7.map.js -> Creates the Leaflet map, adds pins, and moves the map to a clicked card. 
-
-8.main.js -> Starts the app and connects the filters, forms, card buttons and API. 
+| File | What it does |
+|---|---|
+| `config.js` | Settings: API address, map start and zoom, and how many days before an unconfirmed listing is hidden. |
+| `api.js` | All requests to the server: get, add, replace, update and delete listings, and send reports. It also checks for 404 and 500 errors. |
+| `format.js` | Display helpers: escapes HTML, formats rent, bedrooms, dates and phone numbers, and builds the WhatsApp links for reports and new houses. |
+| `validators.js` | Form checks: Kenyan phone numbers, required fields, Facebook links and coordinates. |
+| `filters.js` | Decides which listings are shown, and builds the list of areas. |
+| `areas.js` | Known areas (Juja, Ruaka, Karen...) and their centre points. Puts each pin inside its own area, even if a listing's coordinates are missing or wrong. |
+| `ui.js` | Draws the cards, count, area dropdown, active card, toast messages and form errors. |
+| `map.js` | Creates the Leaflet map, adds pins, and moves the map to a clicked card. |
+| `main.js` | Starts the app and connects the filters, forms, card buttons and API. |
 
 How they fit together: `main.js` asks `api.js` for the listings, `filters.js` picks which to show, and `ui.js` and `map.js` draw them.
 
@@ -189,7 +201,7 @@ How they fit together: `main.js` asks `api.js` for the listings, `filters.js` pi
 
 - Anyone can add, edit or delete a listing, because there are no accounts yet.
 - The "Verified" badge is set in the data, not by the site.
-- Listings without coordinates do not appear on the map.
+- A listing with no coordinates is pinned at the centre of its area. Areas not in `js/areas.js` need their own coordinates to show on the map.
 
 ## Credits
 

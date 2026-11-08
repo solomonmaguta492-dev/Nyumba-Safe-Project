@@ -20,7 +20,10 @@ export function bedroomLabel(n) {
 export function formatDate(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return "";
-  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  // "2026-10-18" is read as UTC, so show it in UTC or it can slip a day.
+  return d.toLocaleDateString("en-GB", {
+    day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+  });
 }
 
 export function todayISO() {
@@ -31,6 +34,32 @@ export function daysSince(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return Infinity;
   return Math.floor((Date.now() - d) / 86400000);
+}
+
+// Builds the wa.me link that sends a report to the site owner.
+export function reportWhatsAppLink(ownerPhone, listing, reason, details = "") {
+  const lines = [
+    "NyumbaSafe report",
+    `Listing: ${listing.name}, ${listing.area} (id ${listing.id})`,
+    `Reason: ${reason}`,
+  ];
+  if (details) lines.push(`Details: ${details}`);
+  return `https://wa.me/${ownerPhone}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+// Builds the wa.me link that sends a new house to the site owner.
+export function submissionWhatsAppLink(ownerPhone, l) {
+  const lines = [
+    "New house for NyumbaSafe",
+    `Name: ${l.name}`,
+    `Area: ${l.area}${l.location ? ` (${l.location})` : ""}`,
+    `Bedrooms: ${bedroomLabel(l.bedrooms)}`,
+    `Rent: ${formatRent(l.rent)} per month`,
+    `Manager: ${l.manager}, ${localPhone(l.phone)}`,
+  ];
+  if (l.facebook) lines.push(`Facebook: ${l.facebook}`);
+  if (l.lat !== null && l.lng !== null) lines.push(`Map: ${l.lat}, ${l.lng}`);
+  return `https://wa.me/${ownerPhone}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
 // 254712345678 becomes 0712345678 for display.

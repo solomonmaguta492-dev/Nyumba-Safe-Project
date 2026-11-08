@@ -1,11 +1,12 @@
 // Starts the app and connects the page, the filters, the forms and the API.
 import {
   getListings, createListing, replaceListing, patchListing, deleteListing, sendReport,
+  submitListing,
 } from "./api.js";
 import { OWNER_WHATSAPP, STATIC_MODE } from "./config.js";
 import { applyFilters, getAreas } from "./filters.js";
 import { validateListing, validateReport, normalizePhone } from "./validators.js";
-import { todayISO } from "./format.js";
+import { todayISO, reportWhatsAppLink, submissionWhatsAppLink } from "./format.js";
 import { initMap, showPins, focusPin, refreshMap } from "./map.js";
 import {
   renderCards, showMessage, setCount, fillAreaSelect, setActiveCard, showToast,
@@ -17,6 +18,7 @@ const results = $("results");
 
 let listings = [];
 let editingId = null;
+let ownerSubmitting = false;
 let reportingId = null;
 
 const findById = (id) => listings.find((l) => String(l.id) === String(id));
@@ -34,7 +36,7 @@ function currentFilters() {
 function render() {
   const shown = applyFilters(listings, currentFilters());
   renderCards(results, shown);
-  showPins(shown);
+  showPins(shown, $("area").value);
   setCount(shown.length, listings.length);
 }
 
@@ -59,9 +61,15 @@ async function load() {
 const listingDialog = $("listing-dialog");
 const listingForm = $("listing-form");
 
-function openListingForm(listing = null) {
+// fromOwner: a house owner is sending a house for review, not adding it directly.
+function openListingForm(listing = null, fromOwner = false) {
   editingId = listing ? listing.id : null;
-  $("listing-title").textContent = listing ? "Edit Listing" : "Add a Listing";
+  ownerSubmitting = fromOwner;
+  $("listing-title").textContent = fromOwner
+    ? "List Your House"
+    : listing ? "Edit Listing" : "Add a Listing";
+  $("listing-note").hidden = !fromOwner;
+  $("listing-submit").textContent = fromOwner ? "Send on WhatsApp" : "Save listing";
   clearErrors(listingForm);
   fillForm(listingForm, listing || {});
   listingDialog.showModal();
@@ -99,6 +107,12 @@ listingForm.addEventListener("submit", async (e) => {
   const button = listingForm.querySelector('[type="submit"]');
   button.disabled = true;
 
+  if (ownerSubmitting) {
+    await sendOwnerListing(data);
+    button.disabled = false;
+    return;
+  }
+
   try {
     if (editingId !== null) {
       await replaceListing(editingId, { ...findById(editingId), ...data });
@@ -116,7 +130,33 @@ listingForm.addEventListener("submit", async (e) => {
   }
 });
 
+/*
+  WhatsApp opens before any await, or the browser may block the new tab.
+  With the API on, the house is also saved in "submissions" to review.
+*/
+async function sendOwnerListing(data) {
+  window.open(submissionWhatsAppLink(OWNER_WHATSAPP, data), "_blank", "noopener");
+  try {
+    if (!STATIC_MODE) {
+      await submitListing({ ...data, submittedAt: new Date().toISOString() });
+    }
+    listingDialog.close();
+    showToast("Thank you. Tap Send in WhatsApp. Your house goes live after we check it.");
+  } catch {
+    showToast("Could not save your listing, but you can still send it on WhatsApp.", true);
+  }
+}
+
+// Clear a field's error as soon as the person edits it.
+[listingForm, $("report-form")].forEach((form) =>
+  form.addEventListener("input", (e) => {
+    const span = form.querySelector(`[data-error-for="${e.target.name}"]`);
+    if (span) span.textContent = "";
+  })
+);
+
 $("add-listing").addEventListener("click", () => openListingForm());
+$("list-house").addEventListener("click", () => openListingForm(null, true));
 $("listing-cancel").addEventListener("click", () => listingDialog.close());
 
 // Report form.
@@ -140,7 +180,16 @@ reportForm.addEventListener("submit", async (e) => {
 
   const button = reportForm.querySelector('[type="submit"]');
   button.disabled = true;
-   try {
+
+  // Open WhatsApp before any await, or the browser may block the new tab.
+  const listing = findById(reportingId);
+  window.open(
+    reportWhatsAppLink(OWNER_WHATSAPP, listing, values.reason, values.details),
+    "_blank",
+    "noopener"
+  );
+
+  try {
     if (!STATIC_MODE) {
       await sendReport({
         listingId: reportingId,
@@ -215,7 +264,6 @@ $("clear").addEventListener("click", () => {
   render();
 });
 
-// Start.
 // Start.
 if (STATIC_MODE) $("add-listing").hidden = true;
 initMap((id) => setActiveCard(id));

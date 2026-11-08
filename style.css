@@ -49,6 +49,20 @@ h1, h2, h3, .brand, .rent {font-family: "Outfit", system-ui, sans-serif;}
 .brand { margin: 0 0 4px; font-weight: 700; font-size: 18px; color: var(--gold); }
 /* clamp(min, preferred, max) makes the heading shrink on phones and grow on desktops */
 .site-header h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
+/* Header: text on the left, "List your house" card on the right (stacked on phones) */
+.header-grid { display: grid; gap: 20px; align-items: center; }
+.owner-cta {
+  display: grid; gap: 8px; padding: 20px; border-radius: 14px;
+  background: var(--white); color: var(--text); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.owner-cta p { margin: 0; }
+.owner-cta-title { font-family: "Outfit", system-ui, sans-serif; font-size: 22px; font-weight: 700; color: var(--green); }
+.owner-cta-text { color: var(--text-light); }
+.btn.btn-big { margin-top: 6px; padding: 16px 28px; font-size: 19px; font-weight: 700; border-radius: 10px; width: 100%; }
+@media (min-width: 760px) {
+  .header-grid { grid-template-columns: minmax(0, 1fr) 340px; }
+}
+.form-note { margin: 0; padding: 10px 12px; border-radius: 8px; background: #e6f0ea; color: var(--text); font-size: 14px; }
 .tagline { margin: 8px 0 14px; max-width: 60ch; color: var(--bg); }
 .safety { display: inline-block; margin: 0; padding: 7px 12px; border-radius: 8px; background: #f8e1d8; color: #8a3320; font-weight: 600; font-size: 15px; 
 }

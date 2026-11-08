@@ -10,10 +10,10 @@
       "manager": "Mr. Kamau",
       "phone": "254700000001",
       "verified": true,
-      "lastConfirmed": "2026-10-18",
       "lat": -1.1018,
       "lng": 37.0144,
-      "facebook": "https://www.facebook.com/"
+      "facebook": "",
+      "confirmedOn": "2026-10-18"
     },
     {
       "id": 2,
@@ -25,10 +25,10 @@
       "manager": "Mrs. Wanjiru",
       "phone": "254115436513",
       "verified": true,
-      "lastConfirmed": "2026-10-16",
       "lat": -1.1062,
       "lng": 37.0201,
-      "facebook": ""
+      "facebook": "",
+      "confirmedOn": "2026-10-16"
     },
     {
       "id": 3,
@@ -40,10 +40,10 @@
       "manager": "Mr. Otieno",
       "phone": "254700000003",
       "verified": true,
-      "lastConfirmed": "2026-10-14",
       "lat": -1.2216,
       "lng": 36.8985,
-      "facebook": "https://www.facebook.com/"
+      "facebook": "",
+      "confirmedOn": "2026-10-14"
     },
     {
       "id": 4,
@@ -55,10 +55,10 @@
       "manager": "Ms. Achieng",
       "phone": "254700000004",
       "verified": false,
-      "lastConfirmed": "2026-10-10",
       "lat": -1.2186,
       "lng": 36.8869,
-      "facebook": ""
+      "facebook": "",
+      "confirmedOn": "2026-10-10"
     },
     {
       "id": 5,
@@ -70,10 +70,10 @@
       "manager": "Mr. Mutua",
       "phone": "254700000005",
       "verified": false,
-      "lastConfirmed": "2026-10-08",
       "lat": -1.1856,
       "lng": 36.9257,
-      "facebook": ""
+      "facebook": "",
+      "confirmedOn": "2026-10-08"
     },
     {
       "id": 6,
@@ -85,23 +85,22 @@
       "manager": "Mrs. Njeri",
       "phone": "254700000006",
       "verified": true,
-      "lastConfirmed": "2026-10-19",
       "lat": -1.2054,
       "lng": 36.7826,
-      "facebook": "https://www.facebook.com/",
+      "facebook": "",
       "confirmedOn": "2026-10-23"
     },
     {
       "name": "SolomonApartment",
-      "area": "karen",
+      "area": "Karen",
       "location": "near ngong road",
       "bedrooms": 4,
       "rent": 70000,
       "manager": "Grandi",
       "phone": "254798913169",
       "facebook": "",
-      "lat": -1.1019,
-      "lng": 37.0144,
+      "lat": -1.3197,
+      "lng": 36.7076,
       "verified": false,
       "confirmedOn": "2026-10-23",
       "id": 7
@@ -115,15 +114,15 @@
       "manager": "Yusuf",
       "phone": "254119229983",
       "facebook": "",
-      "lat": -1.1019,
-      "lng": 37.0144,
+      "lat": -1.311,
+      "lng": 36.837,
       "verified": false,
       "confirmedOn": "2026-10-23",
       "id": 8
     },
     {
       "name": "musili apartment",
-      "area": "juja",
+      "area": "Juja",
       "location": "Near Gate C",
       "bedrooms": 2,
       "rent": 15000,
@@ -138,7 +137,7 @@
     },
     {
       "name": "Solomon village",
-      "area": "juja",
+      "area": "Juja",
       "location": "Near Gate C",
       "bedrooms": 1,
       "rent": 10000,
@@ -160,5 +159,6 @@
       "createdAt": "2026-10-23T09:07:40.464Z",
       "id": 1
     }
-  ]
+  ],
+  "submissions": []
 }
